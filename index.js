@@ -57,16 +57,28 @@ var templates = get_templates(p);
 /*
  * Get us a mail transporter!
  */
-var mailCredentials = {
-  port: process.env.WATCHMEN_AUTH_NODEMAILER_PORT,
-  host: process.env.WATCHMEN_AUTH_NODEMAILER_HOST
-};
+var mailCredentials;
 
-if (process.env.WATCHMENT_AUTH_NODEMAILER_NO_AUTH != 'true') {
+if (process.env.WATCHMEN_AUTH_NODEMAILER_SENDMAIL) {
+  mailCredentials = {
+    sendmail: true
+  }
+
+  if (typeof process.env.WATCHMEN_AUTH_NODEMAILER_SENDMAIL == 'string') {
+    mailCredentials.path = process.env.WATCHMEN_AUTH_NODEMAILER_SENDMAIL;
+  }
+} else {
+  mailCredentials = {
+    port: process.env.WATCHMEN_AUTH_NODEMAILER_PORT,
+    host: process.env.WATCHMEN_AUTH_NODEMAILER_HOST
+  }
+
+  if (process.env.WATCHMENT_AUTH_NODEMAILER_NO_AUTH != 'true') {
     mailCredentials.auth =  {
-        user: process.env.WATCHMEN_AUTH_NODEMAILER_USER,
-        pass: process.env.WATCHMEN_AUTH_NODEMAILER_PASS
+      user: process.env.WATCHMEN_AUTH_NODEMAILER_USER,
+      pass: process.env.WATCHMEN_AUTH_NODEMAILER_PASS
     };
+  }
 }
 
 var mailDefaults = {

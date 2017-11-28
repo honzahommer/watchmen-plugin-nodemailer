@@ -64,7 +64,7 @@ if (process.env.WATCHMEN_AUTH_NODEMAILER_SENDMAIL) {
     sendmail: true
   }
 
-  if (typeof process.env.WATCHMEN_AUTH_NODEMAILER_SENDMAIL != 'true') {
+  if (process.env.WATCHMEN_AUTH_NODEMAILER_SENDMAIL != 'true') {
     mailCredentials.path = process.env.WATCHMEN_AUTH_NODEMAILER_SENDMAIL;
   }
 } else {

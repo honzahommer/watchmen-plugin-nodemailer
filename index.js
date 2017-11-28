@@ -79,6 +79,10 @@ if (process.env.WATCHMEN_AUTH_NODEMAILER_SENDMAIL) {
       pass: process.env.WATCHMEN_AUTH_NODEMAILER_PASS
     };
   }
+
+  mailCredentials.tls = {
+    rejectUnauthorized: false
+  }
 }
 
 var mailDefaults = {

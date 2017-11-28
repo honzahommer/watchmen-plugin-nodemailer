@@ -110,7 +110,7 @@ function handleEvent(eventName) {
     }
 
     // Pass this stuff into the templates
-    var context = { service: service, data: data };
+    var context = { service: service, data: data, env: process.env };
 
     // Give us a template subject or default
     var subject = '[' + eventName + ']' + ' on ' + service.name;

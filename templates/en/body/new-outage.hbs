@@ -1,7 +1,8 @@
 ***** WATCHMEN *****
 
-Host: {{service.name}}
+Name: {{service.name}}
 State: OFFLINE
-Address: {{service.url}}
+Host: {{service.url}}
+Date/Time: {{date data.timestamp}}
 
-{{date data.timestamp}}
+https://${{env.WATCHMEN_BASE_URL}}services/{{service.id}}/view

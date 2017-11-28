@@ -64,7 +64,7 @@ if (process.env.WATCHMEN_AUTH_NODEMAILER_SENDMAIL) {
     sendmail: true
   }
 
-  if (typeof process.env.WATCHMEN_AUTH_NODEMAILER_SENDMAIL == 'string') {
+  if (typeof process.env.WATCHMEN_AUTH_NODEMAILER_SENDMAIL != 'true') {
     mailCredentials.path = process.env.WATCHMEN_AUTH_NODEMAILER_SENDMAIL;
   }
 } else {
@@ -79,17 +79,13 @@ if (process.env.WATCHMEN_AUTH_NODEMAILER_SENDMAIL) {
       pass: process.env.WATCHMEN_AUTH_NODEMAILER_PASS
     };
   }
-
-  mailCredentials.tls = {
-    rejectUnauthorized: false
-  }
 }
 
-var mailDefaults = {
-  from: process.env.WATCHMEN_AUTH_NODEMAILER_USER
-};
+mailCredentials.tls = {
+  rejectUnauthorized: false
+}
 
-var transporter = nodemailer.createTransport(mailCredentials, mailDefaults);
+var transporter = nodemailer.createTransport(mailCredentials);
 
 /*
  * Handle errors during email transport
@@ -124,6 +120,7 @@ function handleEvent(eventName) {
     var body = templates.body[eventName](context);
 
     transporter.sendMail({
+      from: process.env.WATCHMEN_AUTH_NODEMAILER_USER,
       to: service.alertTo,
       subject: subject,
       html: body

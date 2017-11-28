@@ -61,7 +61,8 @@ var mailCredentials;
 
 if (process.env.WATCHMEN_AUTH_NODEMAILER_SENDMAIL) {
   mailCredentials = {
-    sendmail: true
+    sendmail: true,
+    newline: 'unix'
   }
 
   if (process.env.WATCHMEN_AUTH_NODEMAILER_SENDMAIL != 'true') {
@@ -123,7 +124,7 @@ function handleEvent(eventName) {
       from: process.env.WATCHMEN_AUTH_NODEMAILER_USER,
       to: service.alertTo,
       subject: subject,
-      html: body
+      text: body
     }, emailError);
   };
 }

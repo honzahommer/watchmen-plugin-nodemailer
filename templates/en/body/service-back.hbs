@@ -1,8 +1,6 @@
-***** WATCHMEN *****
+***** {{service.name}} is now UP *****
 
-Name: {{service.name}} 
-State: ONLINE
-Host: {{service.url}}
-Date/Time: {{date data.timestamp}} 
+There was an issue with <{{service.url}}> ICPM service. For more details
+please visit <{{env.WATCHMEN_BASE_URL}}services/{{service.id}}/view>.
 
-{{env.WATCHMEN_BASE_URL}}services/{{service.id}}/view
+{{date data.timestamp}}
